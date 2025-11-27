@@ -22,9 +22,9 @@ Execute the C Program for the desired output.
 
 ## C program that receives a message from message queue and display them
 
+## writer.c
 ```
-// C Program for Message Queue (Writer Process)
-
+// C Program for Message Queue (Writer Process) 
 #include <stdio.h> 
 #include <sys/ipc.h> 
 #include <sys/msg.h> 
@@ -36,8 +36,8 @@ struct mesg_buffer {
 } message; 
 int main() 
 { 	key_t key; 
-	int msgid; 
-// ftok to generate unique key 
+	int msgid;
+    // ftok to generate unique key 
 	key = ftok("progfile", 65); 
 	// msgget creates a message queue 
 	// and returns identifier 
@@ -53,9 +53,9 @@ int main()
 }
 ```
 
+## reader.c
 ```
 // C Program for Message Queue (Reader Process)
-
 #include <stdio.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
@@ -69,7 +69,7 @@ int main()
 {
 	key_t key;
 	int msgid;
-// ftok to generate unique key
+    	// ftok to generate unique key
 	key = ftok("progfile", 65);
 	// msgget creates a message queue
 	// and returns identifier
@@ -84,43 +84,14 @@ int main()
 	msgctl(msgid, IPC_RMID, NULL);
 	return 0;
 }
-```
 
+```
 
 ## OUTPUT
 
-```
-gcc -o writer.o writer.c
-$ ./writer.o 
-Write Data : Helloworld
-Data send is : Helloworld
-```
+<img width="1158" height="398" alt="Screenshot from 2025-09-24 08-38-41" src="https://github.com/user-attachments/assets/0293d26e-d725-4bfb-b027-30fa1a31e346" />
 
-```
-gcc -o reader.o reader.c
-$ ./reader.o 
-Data Received is : Helloworld
-```
 
-```
-$ ipcs
------- Message Queues --------
-key        msqid      owner      perms      used-bytes   messages    
-0xffffffff 720896     root    666        560          5           
-
------- Shared Memory Segments --------
-key        shmid      owner      perms      bytes      nattch     status      
-0x00000000 262144     root       600        33554432   2          dest         
-0x00000000 360449     root       600        524288     2          dest         
-0x00000000 688130     root       600        524288     2          dest         
-0x00000000 622595     root       600        524288     2          dest         
-0x00000000 786436     root       600        524288     2          dest         
-0x00000000 655365     root       600        524288     2          dest         
-0x00000000 983046     root       600        524288     2          dest         
-
------- Semaphore Arrays --------
-key        semid      owner      perms      nsems
-```
 
 # RESULT:
 The programs are executed successfully.
